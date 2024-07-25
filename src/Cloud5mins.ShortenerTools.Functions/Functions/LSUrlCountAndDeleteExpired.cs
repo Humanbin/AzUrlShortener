@@ -43,33 +43,33 @@ using System.Threading.Tasks;
 
 namespace Cloud5mins.ShortenerTools.Functions
 {
-    public class LSUrlCountExpired
+    public class LSUrlCountAndDeleteExpired
     {
         private readonly ILogger _logger;
         private readonly ShortenerSettings _settings;
 
-        public LSUrlCountExpired(ILoggerFactory loggerFactory, ShortenerSettings settings)
+        public LSUrlCountAndDeleteExpired(ILoggerFactory loggerFactory, ShortenerSettings settings)
         {
             _logger = loggerFactory.CreateLogger<UrlList>();
             _settings = settings;
         }
 
-        [Function("LSUrlCountExpired")]
+        [Function("LSUrlCountAndDeleteExpired")]
         public async Task<HttpResponseData> Run(
-        [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "api/LSUrlCountExpired")] HttpRequestData req,
+        [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "api/LSUrlCountAndDeleteExpired")] HttpRequestData req,
                                     ExecutionContext context
                                 )
         {
-            _logger.LogInformation($"HTTP trigger - LSUrlCountExpired");
+            _logger.LogInformation($"HTTP trigger - LSUrlCountAndDeleteExpired");
 
             try
             {
                 StorageTableHelper stgHelper = new StorageTableHelper(_settings.DataStorage);
 
                 int DeleteEntitiesCreatedNNumberDaysBeforeToday = Convert.ToInt32(_settings.DeleteEntitiesCreatedNNumberDaysBeforeToday);
-                string result = await stgHelper.CountExpiredItemsAsync(DeleteEntitiesCreatedNNumberDaysBeforeToday);//LS
+                string result = await stgHelper.CountExpiredItemsAndDeleteAsync(DeleteEntitiesCreatedNNumberDaysBeforeToday);//LS
 
-                _logger.LogInformation($"CountExpiredItemsAsync(): " + result);
+                _logger.LogInformation($"LSUrlCountAndDeleteExpired(): " + result);
 
             }
             catch (Exception ex)
