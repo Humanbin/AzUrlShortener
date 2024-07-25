@@ -291,7 +291,8 @@ namespace Cloud5mins.ShortenerTools.Core.Domain
             //    TableOperators.And,
             //    endDateFilter
             //);
-            string Filter = TableQuery.GenerateFilterConditionForDate("Timestamp", QueryComparisons.LessThan, dateTimeFilter);
+            //string Filter = TableQuery.GenerateFilterConditionForDate("Timestamp", QueryComparisons.LessThan, dateTimeFilter);
+            string Filter = TableQuery.GenerateFilterConditionForDate("ExpiresAt", QueryComparisons.LessThan, dateTimeFilter);
 
             TableQuery<MyShortUrlEntity> query = new TableQuery<MyShortUrlEntity>().Where(Filter);
 
