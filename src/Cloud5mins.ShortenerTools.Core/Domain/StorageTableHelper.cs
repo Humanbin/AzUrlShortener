@@ -304,7 +304,7 @@ namespace Cloud5mins.ShortenerTools.Core.Domain
                 TotalEntities += segment.Results.Count;
             } while (token != null);
 
-            return "#Itens: " + TotalEntities + " for the DateFilter: " + dateTimeFilter.ToString();
+            return "#Itens: " + TotalEntities + " for the DateFilter: " + dateTimeFilter.ToString() + "| DeleteEntitiesCreatedNNumberDaysBeforeToday: " + DeleteEntitiesCreatedNNumberDaysBeforeToday;
 
             //return "Deleted " + totalDeleted + " of " + TotalItens + " items with expired date.";
 
