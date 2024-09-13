@@ -55,7 +55,7 @@ namespace Cloud5mins.ShortenerTools.Functions
         }
 
         [Function("LSUrlCountAndDeleteExpiredTimer")]
-        public void Run([TimerTrigger("0 */5 * * * *")] TimerInfo myTimer)
+        public void Run([TimerTrigger("0 0 0 * * *")] TimerInfo myTimer)//Everyday at midnight
         
         {
             _logger.LogInformation($"C# Timer trigger function executed at: {DateTime.Now}");
